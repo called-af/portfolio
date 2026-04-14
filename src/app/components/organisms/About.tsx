@@ -2,16 +2,16 @@
 
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
-import reactImg from "../assets/logo_fm/react.svg";
-import nextImg from "../assets/logo_fm/faviconNext.ico";
-import nuxtImg from "../assets/logo_fm/faviconNuxt.ico";
-import vueImg from "../assets/logo_fm/faviconVuue.ico";
-import laravelImg from "../assets/logo_fm/faviconLaravel.ico";
-import inertiaImg from "../assets/logo_fm/faviconInertia.ico";
-import tailwindImg from "../assets/logo_fm/faviconTailwind.ico";
-import axiosImg from "../assets/logo_fm/faviconAxios.ico";
-import mysqlImg from "../assets/logo_fm/faviconMysql.png";
-import yeahRightImg from "../assets/yeah-right.png";
+import reactImg from "@/app/assets/logo_fm/react.svg";
+import nextImg from "@/app/assets/logo_fm/faviconNext.ico";
+import nuxtImg from "@/app/assets/logo_fm/faviconNuxt.ico";
+import vueImg from "@/app/assets/logo_fm/faviconVuue.ico";
+import laravelImg from "@/app/assets/logo_fm/faviconLaravel.ico";
+import inertiaImg from "@/app/assets/logo_fm/faviconInertia.ico";
+import tailwindImg from "@/app/assets/logo_fm/faviconTailwind.ico";
+import axiosImg from "@/app/assets/logo_fm/faviconAxios.ico";
+import mysqlImg from "@/app/assets/logo_fm/faviconMysql.png";
+import yeahRightImg from "@/app/assets/yeah-right.png";
 
 const skills: { name: string; image: StaticImageData }[] = [
   { name: "React", image: reactImg },
@@ -81,7 +81,7 @@ export default function About() {
             <div key={exp.company} className="pl-4 flex gap-3">
               <button
                 onClick={handleCheck}
-                className="mt-1 w-4 h-4 border-2 dark:border-neutral-600 border-neutral-400 rounded-sm flex-shrink-0 hover:dark:border-neutral-400 hover:border-neutral-600 transition"
+                className="mt-1 w-4 h-4 border-2 dark:border-neutral-600 border-neutral-400 rounded-sm shrink-0 hover:dark:border-neutral-400 hover:border-neutral-600 transition"
               />
               <div>
                 <h3 className="font-medium">{exp.title}</h3>
