@@ -1,46 +1,43 @@
-import Image, { StaticImageData } from "next/image"
+import { ReactNode } from "react"
 import clsx from "clsx"
 import {
+  type CardVariant,
   type Shadow,
-  shadowLayer,
+  cardVariantStyles,
   shadowOffset,
   hoverTranslate,
+  shadowLayer,
   baseBorder,
   motionBase,
 } from "@/app/utils/Tokens"
 
-type ImageItem = {
-  src: string | StaticImageData
-  alt: string
-  width: number
-  height: number
-}
-
-interface ImageCardProps {
-  imagedatas: ImageItem
-  shadow?: Shadow
+interface CardProps {
+  children: ReactNode
   className?: string
+  variant?: CardVariant
+  shadow?: Shadow
 }
 
-export default function ImageCard({
-  imagedatas,
-  shadow = "md",
+export default function Card({
+  children,
   className,
-}: ImageCardProps) {
+  variant = "yellow",
+  shadow = "md",
+}: CardProps) {
   return (
     <div className={clsx("relative inline-block", className)}>
       <div className={clsx(shadowLayer, shadowOffset[shadow])} />
 
       <div
         className={clsx(
-          "relative overflow-hidden border-3 rounded-md",
+          "relative border-2 rounded-md p-4",
           baseBorder,
           motionBase,
           hoverTranslate[shadow],
-          "bg-(--ds-paper-raised)"
+          cardVariantStyles[variant]
         )}
       >
-        <Image {...imagedatas} />
+        {children}
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import { projects } from "@/app/data/project";
 
 export default function Projects() {
   return (
-    <div className="min-h-screen px-6 md:px-16 lg:px-30 py-10 pb-20 md:pb-10">
+    <div className="min-h-screen px-6 md:px-16 lg:px-30 py-10 pb-20 md:pb-10" id="project">
       <section className="max-w-3xl">
         <h1 className="text-3xl md:text-5xl font-bold mb-6">Projects</h1>
         <p className="dark:text-neutral-400 text-neutral-600 text-base md:text-lg mb-8">

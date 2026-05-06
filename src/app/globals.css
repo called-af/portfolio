@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-body {
-  font-family: 'Poppins', sans-serif;
+/* Scrollbar */
+:root {
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-thumb-hover: #a1a1a1;
 }
 
 .dark {
@@ -13,24 +15,111 @@ body {
   --scrollbar-thumb-hover: #292929;
 }
 
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+
+/* =========================
+   DESIGN TOKENS
+========================= */
+
 :root {
-  --scrollbar-track: #f1f1f1;
-  --scrollbar-thumb: #c1c1c1;
-  --scrollbar-thumb-hover: #a1a1a1;
+  --ds-ink: #0a0a0a;
+  --ds-ink-muted: #3d3d3d;
+  --ds-paper: #fafafa;
+  --ds-paper-raised: #ffffff;
+
+  --ds-shadow-color: #0a0a0a;
+  --ds-shadow-opacity: 1;
+
+  --ds-border-color: #0a0a0a;
+  --ds-border-width: 1.5px;
+
+  /* Colors */
+  --ds-neutral-bg: #e5e5e5;
+  --ds-neutral-text: #1a1a1a;
+  --ds-neutral-dot: #404040;
+
+  --ds-success-bg: #6ee7b7;
+  --ds-success-text: #064e3b;
+  --ds-success-dot: #065f46;
+
+  --ds-warning-bg: #fcd34d;
+  --ds-warning-text: #78350f;
+  --ds-warning-dot: #92400e;
+
+  --ds-danger-bg: #fca5a5;
+  --ds-danger-text: #7f1d1d;
+  --ds-danger-dot: #991b1b;
+
+  --ds-info-bg: #7dd3fc;
+  --ds-info-text: #0c4a6e;
+  --ds-info-dot: #075985;
+
+  --ds-purple-bg: #c4b5fd;
+  --ds-purple-text: #2e1065;
+  --ds-purple-dot: #3b0764;
+
+  /* Card */
+  --ds-card-yellow: #facc15;
+  --ds-card-teal: #5eead4;
+  --ds-card-coral: #fb923c;
+  --ds-card-purple: #a78bfa;
+  --ds-card-white: #ffffff;
+
+  /* Button */
+  --ds-btn-primary: #c084fc;
+  --ds-btn-secondary: #9ca3af;
+  --ds-btn-outline: #ffffff;
+  --ds-btn-danger: #f87171;
+  --ds-btn-text: #0a0a0a;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
+.dark {
+  --ds-ink: #f0f0f0;
+  --ds-ink-muted: #a3a3a3;
+  --ds-paper: #111111;
+  --ds-paper-raised: #1c1c1c;
 
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-}
+  --ds-shadow-color: #ffffff;
+  --ds-shadow-opacity: 0.85;
 
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-}
+  --ds-border-color: #e5e5e5;
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
+  --ds-neutral-bg: #2a2a2a;
+  --ds-neutral-text: #e5e5e5;
+  --ds-neutral-dot: #a3a3a3;
+
+  --ds-success-bg: #064e3b;
+  --ds-success-text: #6ee7b7;
+  --ds-success-dot: #34d399;
+
+  --ds-warning-bg: #78350f;
+  --ds-warning-text: #fcd34d;
+  --ds-warning-dot: #fbbf24;
+
+  --ds-danger-bg: #7f1d1d;
+  --ds-danger-text: #fca5a5;
+  --ds-danger-dot: #f87171;
+
+  --ds-info-bg: #0c4a6e;
+  --ds-info-text: #7dd3fc;
+  --ds-info-dot: #38bdf8;
+
+  --ds-purple-bg: #2e1065;
+  --ds-purple-text: #c4b5fd;
+  --ds-purple-dot: #a78bfa;
+
+  --ds-card-yellow: #854d0e;
+  --ds-card-teal: #0f766e;
+  --ds-card-coral: #9a3412;
+  --ds-card-purple: #4c1d95;
+  --ds-card-white: #1c1c1c;
+
+  --ds-btn-primary: #7c3aed;
+  --ds-btn-secondary: #4b5563;
+  --ds-btn-outline: #1c1c1c;
+  --ds-btn-danger: #dc2626;
+  --ds-btn-text: #f0f0f0;
 }

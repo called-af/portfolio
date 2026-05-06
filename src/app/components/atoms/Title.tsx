@@ -8,12 +8,12 @@ interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 const styles: Record<TitleVariant, string> = {
-  h1: "text-6xl font-bold tracking-tight",
-  h2: "text-4xl font-semibold tracking-tight",
-  h3: "text-2xl font-semibold",
-  h4: "text-xl font-medium",
-  h5: "text-lg font-medium",
-  h6: "text-base font-medium",
+  h1: "text-8xl font-bold tracking-tight",
+  h2: "text-6xl font-semibold tracking-tight",
+  h3: "text-4xl font-semibold",
+  h4: "text-2xl font-medium",
+  h5: "text-xl font-medium",
+  h6: "text-lg font-medium",
 }
 
 export default function Title({
@@ -26,7 +26,10 @@ export default function Title({
 
   return (
     <Component
-      className={clsx(styles[as], "text-gray-900", className)}
+      className={clsx(styles[as], 
+        "font-black tracking-tight",
+        "text-(--ds-ink)",
+        "font-(--font-orbitron)", className)}
       {...props}
     >
       {children}

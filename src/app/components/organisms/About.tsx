@@ -52,7 +52,7 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen px-6 md:px-16 lg:px-30 py-10 pb-20 md:pb-10">
+    <div className="min-h-screen px-6 md:px-16 lg:px-30 py-10 pb-20 md:pb-10" id="about">
       <Image
         src={yeahRightImg}
         alt="Yeah Right"

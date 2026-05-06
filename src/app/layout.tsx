@@ -1,13 +1,20 @@
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import { Orbitron, Share_Tech_Mono } from "next/font/google";
 import { Providers } from "@/app/components/molecules/Providers";
 import { Sidebar } from "@/app/components/molecules/Sidebar";
 
-const poppins = Poppins({
+const orbitron = Orbitron({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700", "900"],
   display: "swap",
-  variable: "--font-poppins",
+  variable: "--font-orbitron",
+});
+
+const shareTechMono = Share_Tech_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-share-tech-mono",
 });
 
 export const metadata = {
@@ -18,20 +25,24 @@ export const metadata = {
   },
 };
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full ${poppins.variable}`} suppressHydrationWarning>
-      <body className="font-poppins bg-white dark:bg-black text-black dark:text-white transition-colors">
+    <html
+      lang="en"
+      className={`h-full ${orbitron.variable} ${shareTechMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-(family-name:--font-share-tech-mono) bg-white dark:bg-black text-black dark:text-white transition-colors">
         <Providers>
-          <main className="overflow-hidden flex w-full">
+          <main className="relative w-full">
             <Sidebar />
-            <div>{children}</div>
+            <div className="w-full pb-24 md:pb-0">
+              {children}
+            </div>
           </main>
         </Providers>
       </body>
