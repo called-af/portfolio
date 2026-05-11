@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <>
       <div>
-        <Hero />
-        <About />
-        <Project />
+        <Hero id="profile" className=""/>
+        <About id="about" className=""/>
+        <Project id="project" className=""/>
       </div>
     </>
   );

@@ -26,7 +26,7 @@ export default function Badge({
 
       <span
         className={clsx(
-          "relative flex items-center gap-2 px-3 py-1 text-xs font-bold border-2 rounded-sm",
+          "relative flex items-center gap-2 px-3 py-1 text-sm font-bold border-(length:--ds-border-width) rounded-sm",
           baseBorder,
           badgeVariantStyles[variant]
         )}

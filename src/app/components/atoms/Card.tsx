@@ -30,7 +30,7 @@ export default function Card({
 
       <div
         className={clsx(
-          "relative border-2 rounded-md p-4",
+          "relative border-(length:--ds-border-width) rounded-md p-4",
           baseBorder,
           motionBase,
           hoverTranslate[shadow],

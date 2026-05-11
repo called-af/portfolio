@@ -39,7 +39,7 @@ export default function Button({
       <button
         disabled={isDisabled}
         className={clsx(
-          "relative inline-flex items-center gap-2 px-4 py-2 border-2 rounded-sm font-medium",
+          "relative inline-flex items-center gap-2 px-4 py-2 border-(length:--ds-border-width) rounded-sm font-medium",
           baseBorder,
           motionBase,
           !isDisabled && hoverTranslate[shadow],

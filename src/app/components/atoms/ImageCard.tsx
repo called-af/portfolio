@@ -33,7 +33,7 @@ export default function ImageCard({
 
       <div
         className={clsx(
-          "relative overflow-hidden border-3 rounded-md",
+          "relative overflow-hidden rounded-md",
           baseBorder,
           motionBase,
           hoverTranslate[shadow],
