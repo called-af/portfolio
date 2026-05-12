@@ -14,6 +14,7 @@ export default function Hero({ id, className }: HeroProps) {
     relative h-screen
     flex flex-col items-center justify-center
     bg-(--ds-paper) text-(--ds-ink)
+    border-b-[3px] border-(--ds-border-color)
     overflow-hidden
 
     px-6 py-24
