@@ -64,8 +64,6 @@ function ProjectCard({
         <div
           className={clsx(
             "relative w-full flex-1 min-h-40",
-            "border-b-(length:--ds-border-width)",
-            "border-b-(--ds-border-color)"
           )}
         >
           <Image
@@ -90,7 +88,6 @@ function ProjectCard({
         <div
           className={clsx(
             "p-4",
-            "bg-(--ds-paper-raised)"
           )}
         >
           <h3
