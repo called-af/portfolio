@@ -25,7 +25,7 @@ const oxanium = Oxanium({
 });
 
 export const metadata = {
-  title: "Dani | Portfolio",
+  title: "Arkadani | Portfolio",
   description: "Personal portfolio — crafting the web, one pixel at a time",
   icons: {
     icon: "/favicon.jpg",
