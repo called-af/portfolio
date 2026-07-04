@@ -1,3 +1,5 @@
+"use client";
+
 import Hero from "@/app/components/organisms/Hero"
 import About from "@/app/components/organisms/About";
 import Project from "@/app/components/organisms/Project";
@@ -8,8 +10,8 @@ export default function Home() {
     <>
       <div>
         <Hero id="profile" className=""/>
-        <About id="about" className=""/>
         <Project id="project" className=""/>
+        <About id="about" className=""/>
         <Footer id="contact" className=""/>      
       </div>
     </>

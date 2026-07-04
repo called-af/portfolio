@@ -1,25 +1,32 @@
 import "./globals.css";
-import { Orbitron, Share_Tech_Mono } from "next/font/google";
+import { VT323, Press_Start_2P, Oxanium } from "next/font/google";
 import { Providers } from "@/app/components/molecules/Providers";
 import { Sidebar } from "@/app/components/molecules/Sidebar";
 
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  display: "swap",
-  variable: "--font-orbitron",
-});
-
-const shareTechMono = Share_Tech_Mono({
+const vt323 = VT323({
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
-  variable: "--font-share-tech-mono",
+  variable: "--font-pixel",
+});
+
+const pressStart2P = Press_Start_2P({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const oxanium = Oxanium({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-body",
 });
 
 export const metadata = {
-  title: "Punish | Greetings",
-  description: "Personal portfolio website",
+  title: "Dani | Portfolio",
+  description: "Personal portfolio — crafting the web, one pixel at a time",
   icons: {
     icon: "/favicon.jpg",
   },
@@ -33,14 +40,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full ${orbitron.variable} ${shareTechMono.variable}`}
+      className={`h-full ${vt323.variable} ${pressStart2P.variable} ${oxanium.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-(family-name:--font-share-tech-mono) bg-white dark:bg-black text-black dark:text-white transition-colors">
+      <body
+        className="font-(family-name:--font-body) bg-(--ds-paper) text-(--ds-ink) transition-colors"
+        style={{ imageRendering: "pixelated" }}
+      >
         <Providers>
           <main className="relative w-full">
             <Sidebar />
-            <div className="w-full pb-24 md:pb-0">
+            <div className="w-full">
               {children}
             </div>
           </main>

@@ -2,124 +2,424 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Scrollbar */
 :root {
-  --scrollbar-track: #f1f1f1;
-  --scrollbar-thumb: #c1c1c1;
-  --scrollbar-thumb-hover: #a1a1a1;
+  --scrollbar-track: #1a1a1a;
+  --scrollbar-thumb: #3db213;
+  --scrollbar-thumb-hover: #5d9c3a;
 }
 
 .dark {
-  --scrollbar-track: #181818;
-  --scrollbar-thumb: #242424;
-  --scrollbar-thumb-hover: #292929;
+  --scrollbar-track: #0d0d0d;
+  --scrollbar-thumb: #3db213;
+  --scrollbar-thumb-hover: #5d9c3a;
 }
 
-::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); }
 ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
-/* =========================
-   DESIGN TOKENS
-========================= */
 
+/* ================================
+   LIGHT MODE
+   Palette: black · white · gray · green
+================================ */
 :root {
-  --ds-ink: #0a0a0a;
-  --ds-ink-muted: #3d3d3d;
-  --ds-paper: #fafafa;
+  /* Text */
+  --ds-ink:        #1a1a1a;
+  --ds-ink-muted:  #555555;
+
+  /* Backgrounds — pure white/light gray */
+  --ds-paper:        #f5f5f5;
   --ds-paper-raised: #ffffff;
 
-  --ds-shadow-color: #0a0a0a;
+  /* Shadow & Border */
+  --ds-shadow-color:   #1a1a1a;
   --ds-shadow-opacity: 1;
+  --ds-border-color:   #1a1a1a;
+  --ds-border-width:   3px;
 
-  --ds-border-color: #0a0a0a;
-  --ds-border-width: 3px;
+  /* ---- Greens — earthy Minecraft tones, no neon ---- */
+  --mc-green-light: #4a7a20;   /* grass highlight */
+  --mc-green-mid:   #4a7a20;   /* main grass green */
+  --mc-green-dark:  #1a5a08;   /* deep foliage */
+  --mc-grass-top:   #4a7a20;
+  --mc-emerald:     #4a7a20;   /* same earthy green, not neon */
+  --mc-emerald-dark:#1a5a08;
 
-  /* Colors */
-  --ds-neutral-bg: #e5e5e5;
+  /* ---- Grays (stone/cobble scale) ---- */
+  --mc-stone:   #8b8b8b;
+  --mc-cobble:  #767676;
+  --mc-gravel:  #9e9e9e;
+
+  /* ---- Aliases (formerly named after other colors) ---- */
+  --mc-dirt:    #777777;   /* was brown, now mid-gray */
+  --mc-wood:    #888888;   /* was brown, now gray */
+  --mc-sand:    #c6c6c6;   /* was yellow, now light gray */
+  --mc-sky:     #4a7a20;   /* was blue, now green */
+  --mc-water:   #1a5a08;   /* was blue, now dark green */
+  --mc-red:     #1a5a08;   /* was red, now dark green */
+  --mc-red-light:#4a7a20;  /* was red-light, now green */
+  --mc-gold:    #4a7a20;   /* was gold/yellow, now light green */
+  --mc-gold-light:#7aaa3a; /* was gold-light, now light green */
+  --mc-diamond: #4a7a20;   /* was cyan, now green */
+  --mc-diamond-dark:#1a5a08;
+  --mc-amethyst:    #8b8b8b; /* was purple, now gray */
+  --mc-amethyst-dark:#555555;
+
+  /* ---- Minecraft UI ---- */
+  --mc-ui-bg:           #c6c6c6;
+  --mc-ui-dark:         #1a1a1a;
+  --mc-ui-border-light: #ffffff;
+  --mc-ui-border-dark:  #555555;
+  --mc-ui-slot:         #8b8b8b;
+  --mc-ui-slot-hover:   #a0a0a0;
+
+  /* ---- Semantic tokens ---- */
+  --ds-neutral-bg:   #c6c6c6;
   --ds-neutral-text: #1a1a1a;
-  --ds-neutral-dot: #404040;
+  --ds-neutral-dot:  #555555;
 
-  --ds-success-bg: #6ee7b7;
-  --ds-success-text: #064e3b;
-  --ds-success-dot: #065f46;
+  --ds-success-bg:   #4a7a20;
+  --ds-success-text: #0a1a06;
+  --ds-success-dot:  #1a5a08;
 
-  --ds-warning-bg: #fcd34d;
-  --ds-warning-text: #78350f;
-  --ds-warning-dot: #92400e;
+  --ds-warning-bg:   #4a7a20;
+  --ds-warning-text: #ffffff;
+  --ds-warning-dot:  #1a5a08;
 
-  --ds-danger-bg: #fca5a5;
-  --ds-danger-text: #7f1d1d;
-  --ds-danger-dot: #991b1b;
+  --ds-danger-bg:    #444444;
+  --ds-danger-text:  #ffffff;
+  --ds-danger-dot:   #888888;
 
-  --ds-info-bg: #7dd3fc;
-  --ds-info-text: #0c4a6e;
-  --ds-info-dot: #075985;
+  --ds-info-bg:      #a0a0a0;
+  --ds-info-text:    #1a1a1a;
+  --ds-info-dot:     #555555;
 
-  --ds-purple-bg: #c4b5fd;
-  --ds-purple-text: #2e1065;
-  --ds-purple-dot: #3b0764;
+  --ds-purple-bg:    #8b8b8b;
+  --ds-purple-text:  #ffffff;
+  --ds-purple-dot:   #555555;
 
-  /* Card */
-  --ds-card-yellow: #facc15;
-  --ds-card-teal: #5eead4;
-  --ds-card-coral: #fb923c;
-  --ds-card-purple: #a78bfa;
-  --ds-card-white: #ffffff;
+  /* ---- Card variants ---- */
+  --ds-card-yellow:  #4a7a20;
+  --ds-card-teal:    #4a7a20;
+  --ds-card-coral:   #1a5a08;
+  --ds-card-purple:  #c6c6c6;
+  --ds-card-white:   #ffffff;
 
-  /* Button */
-  --ds-btn-primary: #c084fc;
-  --ds-btn-secondary: #9ca3af;
-  --ds-btn-outline: #ffffff;
-  --ds-btn-danger: #f87171;
-  --ds-btn-text: #0a0a0a;
+  /* ---- Buttons ---- */
+  --ds-btn-primary-bg:           #4a7a20;
+  --ds-btn-primary-border-light: #4a7a20;
+  --ds-btn-primary-border-dark:  #1a5a08;
+  --ds-btn-primary-text:         #ffffff;
+
+  --ds-btn-secondary-bg:           #8b8b8b;
+  --ds-btn-secondary-border-light: #c6c6c6;
+  --ds-btn-secondary-border-dark:  #4a4a4a;
+  --ds-btn-secondary-text:         #ffffff;
+
+  --ds-btn-outline-bg:           #f5f5f5;
+  --ds-btn-outline-border-light: #ffffff;
+  --ds-btn-outline-border-dark:  #aaaaaa;
+  --ds-btn-outline-text:         #1a1a1a;
+
+  --ds-btn-danger-bg:           #444444;
+  --ds-btn-danger-border-light: #888888;
+  --ds-btn-danger-border-dark:  #1a1a1a;
+  --ds-btn-danger-text:         #ffffff;
 }
 
+/* ================================
+   DARK MODE
+   Palette: black · white · gray · green
+================================ */
 .dark {
-  --ds-ink: #f0f0f0;
-  --ds-ink-muted: #a3a3a3;
-  --ds-paper: #111111;
-  --ds-paper-raised: #1c1c1c;
+  --ds-ink:        #e8e8e8;
+  --ds-ink-muted:  #aaaaaa;
+  --ds-paper:      #111111;
+  --ds-paper-raised:#1a1a1a;
 
-  --ds-shadow-color: #ffffff;
-  --ds-shadow-opacity: 0.85;
+  --ds-shadow-color:   #000000;
+  --ds-shadow-opacity: 0.9;
+  --ds-border-color:   #3db213;
 
-  --ds-border-color: #e5e5e5;
+  --ds-neutral-bg:   #2a2a2a;
+  --ds-neutral-text: #c6c6c6;
+  --ds-neutral-dot:  #888888;
 
-  --ds-neutral-bg: #2a2a2a;
-  --ds-neutral-text: #e5e5e5;
-  --ds-neutral-dot: #a3a3a3;
+  --ds-success-bg:   #0f2a08;
+  --ds-success-text: #4a7a20;
+  --ds-success-dot:  #5d9c3a;
 
-  --ds-success-bg: #064e3b;
-  --ds-success-text: #6ee7b7;
-  --ds-success-dot: #34d399;
+  --ds-warning-bg:   #0f2a08;
+  --ds-warning-text: #4a7a20;
+  --ds-warning-dot:  #3db213;
 
-  --ds-warning-bg: #78350f;
-  --ds-warning-text: #fcd34d;
-  --ds-warning-dot: #fbbf24;
+  --ds-danger-bg:    #2a2a2a;
+  --ds-danger-text:  #c6c6c6;
+  --ds-danger-dot:   #555555;
 
-  --ds-danger-bg: #7f1d1d;
-  --ds-danger-text: #fca5a5;
-  --ds-danger-dot: #f87171;
+  --ds-info-bg:      #2a2a2a;
+  --ds-info-text:    #c6c6c6;
+  --ds-info-dot:     #888888;
 
-  --ds-info-bg: #0c4a6e;
-  --ds-info-text: #7dd3fc;
-  --ds-info-dot: #38bdf8;
+  --ds-purple-bg:    #1a1a1a;
+  --ds-purple-text:  #aaaaaa;
+  --ds-purple-dot:   #555555;
 
-  --ds-purple-bg: #2e1065;
-  --ds-purple-text: #c4b5fd;
-  --ds-purple-dot: #a78bfa;
+  --ds-card-yellow:  #0f2a08;
+  --ds-card-teal:    #162808;
+  --ds-card-coral:   #1a1a1a;
+  --ds-card-purple:  #222222;
+  --ds-card-white:   #1a1a1a;
 
-  --ds-card-yellow: #854d0e;
-  --ds-card-teal: #0f766e;
-  --ds-card-coral: #9a3412;
-  --ds-card-purple: #4c1d95;
-  --ds-card-white: #1c1c1c;
+  --ds-btn-primary-bg:           #3db213;
+  --ds-btn-primary-border-light: #4a7a20;
+  --ds-btn-primary-border-dark:  #1a3a0a;
+  --ds-btn-primary-text:         #ffffff;
 
-  --ds-btn-primary: #7c3aed;
-  --ds-btn-secondary: #4b5563;
-  --ds-btn-outline: #1c1c1c;
-  --ds-btn-danger: #dc2626;
-  --ds-btn-text: #f0f0f0;
+  --ds-btn-secondary-bg:           #3c3c3c;
+  --ds-btn-secondary-border-light: #555555;
+  --ds-btn-secondary-border-dark:  #1e1e1e;
+  --ds-btn-secondary-text:         #c6c6c6;
+
+  --ds-btn-outline-bg:           #1a1a1a;
+  --ds-btn-outline-border-light: #444444;
+  --ds-btn-outline-border-dark:  #0a0a0a;
+  --ds-btn-outline-text:         #e8e8e8;
+
+  --ds-btn-danger-bg:           #2a2a2a;
+  --ds-btn-danger-border-light: #555555;
+  --ds-btn-danger-border-dark:  #0a0a0a;
+  --ds-btn-danger-text:         #aaaaaa;
+
+  /* Greens - dark mode */
+  --mc-green-light:  #5d9c3a;
+  --mc-green-mid:    #3db213;
+  --mc-green-dark:   #1a3a0a;
+  --mc-grass-top:    #3db213;
+  --mc-emerald:      #3db213;
+  --mc-emerald-dark: #1a3a0a;
+
+  /* Grays - dark mode */
+  --mc-stone:   #555555;
+  --mc-cobble:  #444444;
+  --mc-gravel:  #666666;
+
+  /* Aliases - dark mode */
+  --mc-dirt:         #555555;
+  --mc-wood:         #444444;
+  --mc-sand:         #333333;
+  --mc-sky:          #3db213;
+  --mc-water:        #1a3a0a;
+  --mc-red:          #0f2a08;
+  --mc-red-light:    #3db213;
+  --mc-gold:         #5d9c3a;
+  --mc-gold-light:   #4a7a20;
+  --mc-diamond:      #3db213;
+  --mc-diamond-dark: #1a3a0a;
+  --mc-amethyst:     #555555;
+  --mc-amethyst-dark:#333333;
+
+  --mc-ui-bg:           #2a2a2a;
+  --mc-ui-dark:         #111111;
+  --mc-ui-border-light: #555555;
+  --mc-ui-border-dark:  #1a1a1a;
+  --mc-ui-slot:         #333333;
+  --mc-ui-slot-hover:   #444444;
 }
+
+/* ================================
+   MINECRAFT PIXEL PATTERNS
+================================ */
+
+.mc-grass-pattern {
+  background-color: var(--mc-dirt);
+  background-image:
+    repeating-linear-gradient(
+      0deg, transparent, transparent 8px,
+      rgba(0,0,0,0.05) 8px, rgba(0,0,0,0.05) 9px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 8px,
+      rgba(0,0,0,0.05) 8px, rgba(0,0,0,0.05) 9px
+    );
+  border-top: 8px solid var(--mc-grass-top);
+}
+
+.mc-stone-pattern {
+  background-color: var(--mc-stone);
+  background-image:
+    repeating-linear-gradient(
+      0deg, transparent, transparent 16px,
+      rgba(0,0,0,0.08) 16px, rgba(0,0,0,0.08) 17px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 16px,
+      rgba(0,0,0,0.08) 16px, rgba(0,0,0,0.08) 17px
+    );
+}
+
+.mc-pixel-overlay {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* ================================
+   MINECRAFT UI PANEL STYLE
+================================ */
+
+.mc-panel {
+  background-color: var(--mc-ui-bg);
+  border: 3px solid;
+  border-color: var(--mc-ui-border-light) var(--mc-ui-border-dark) var(--mc-ui-border-dark) var(--mc-ui-border-light);
+  image-rendering: pixelated;
+}
+
+.mc-panel-inset {
+  background-color: #373737;
+  border: 3px solid;
+  border-color: var(--mc-ui-border-dark) var(--mc-ui-border-light) var(--mc-ui-border-light) var(--mc-ui-border-dark);
+}
+
+/* ================================
+   MINECRAFT BUTTON STYLES
+================================ */
+
+.mc-button-clean {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  cursor: pointer;
+  user-select: none;
+  image-rendering: pixelated;
+  transition: all 0.1s ease;
+}
+
+.mc-button-clean:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.mc-button-clean-primary {
+  background-color: var(--ds-btn-primary-bg);
+  color: var(--ds-btn-primary-text);
+  box-shadow:
+    inset 2px 2px 0 0 var(--ds-btn-primary-border-light),
+    inset -2px -2px 0 0 var(--ds-btn-primary-border-dark);
+}
+.mc-button-clean-primary:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ds-btn-primary-bg) 85%, white);
+}
+.mc-button-clean-primary:active:not(:disabled) {
+  box-shadow:
+    inset -2px -2px 0 0 var(--ds-btn-primary-border-light),
+    inset 2px 2px 0 0 var(--ds-btn-primary-border-dark);
+}
+
+.mc-button-clean-secondary {
+  background-color: var(--ds-btn-secondary-bg);
+  color: var(--ds-btn-secondary-text);
+  box-shadow:
+    inset 2px 2px 0 0 var(--ds-btn-secondary-border-light),
+    inset -2px -2px 0 0 var(--ds-btn-secondary-border-dark);
+}
+.mc-button-clean-secondary:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ds-btn-secondary-bg) 85%, white);
+}
+.mc-button-clean-secondary:active:not(:disabled) {
+  box-shadow:
+    inset -2px -2px 0 0 var(--ds-btn-secondary-border-light),
+    inset 2px 2px 0 0 var(--ds-btn-secondary-border-dark);
+}
+
+.mc-button-clean-outline {
+  background-color: var(--ds-btn-outline-bg);
+  color: var(--ds-btn-outline-text);
+  box-shadow:
+    inset 2px 2px 0 0 var(--ds-btn-outline-border-light),
+    inset -2px -2px 0 0 var(--ds-btn-outline-border-dark);
+}
+.mc-button-clean-outline:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ds-btn-outline-bg) 85%, white);
+}
+.mc-button-clean-outline:active:not(:disabled) {
+  box-shadow:
+    inset -2px -2px 0 0 var(--ds-btn-outline-border-light),
+    inset 2px 2px 0 0 var(--ds-btn-outline-border-dark);
+}
+
+.mc-button-clean-danger {
+  background-color: var(--ds-btn-danger-bg);
+  color: var(--ds-btn-danger-text);
+  box-shadow:
+    inset 2px 2px 0 0 var(--ds-btn-danger-border-light),
+    inset -2px -2px 0 0 var(--ds-btn-danger-border-dark);
+}
+.mc-button-clean-danger:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ds-btn-danger-bg) 85%, white);
+}
+.mc-button-clean-danger:active:not(:disabled) {
+  box-shadow:
+    inset -2px -2px 0 0 var(--ds-btn-danger-border-light),
+    inset 2px 2px 0 0 var(--ds-btn-danger-border-dark);
+}
+
+/* ================================
+   TEXT STYLES
+================================ */
+
+.mc-text-shadow {
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.mc-text-glow-green {
+  text-shadow: 0 0 8px var(--mc-green-light), 0 0 20px var(--mc-green-mid);
+}
+
+/* ================================
+   ANIMATIONS
+================================ */
+
+@keyframes mc-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes mc-bounce-pixel {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes mc-slide-in {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes mc-particle-float {
+  0% { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-40px) translateX(10px); opacity: 0; }
+}
+
+@keyframes mc-sway {
+  0%, 100% { transform: rotate(-1deg) skewX(-0.5deg); }
+  50% { transform: rotate(1deg) skewX(0.5deg); }
+}
+
+@keyframes mc-pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(61, 178, 19, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(61, 178, 19, 0); }
+}
+
+.mc-sway    { animation: mc-sway 3s ease-in-out infinite; }
+.mc-flicker { animation: mc-flicker 2s ease-in-out infinite; }
+.mc-bounce  { animation: mc-bounce-pixel 1s ease-in-out infinite; }
+.mc-pulse   { animation: mc-pulse-green 2s ease-in-out infinite; }

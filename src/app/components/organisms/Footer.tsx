@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Github,
@@ -5,9 +7,11 @@ import {
   Linkedin,
   Mail,
   ArrowUpRight,
+  MessageSquare,
+  Globe,
+  Circle
 } from "lucide-react";
 
-import Badge from "@/app/components/atoms/Badge";
 import Button from "@/app/components/atoms/Button";
 import Title from "@/app/components/atoms/Title";
 import clsx from "clsx";
@@ -18,21 +22,9 @@ type FooterProps = {
 };
 
 const socials = [
-  {
-    label: "GitHub",
-    href: "https://github.com/yourusername",
-    icon: Github,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
-    icon: Linkedin,
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com/yourusername",
-    icon: Instagram,
-  },
+  { label: "GitHub",    href: "https://github.com/yourusername",    icon: Github    },
+  { label: "LinkedIn",  href: "https://linkedin.com/in/yourusername", icon: Linkedin },
+  { label: "Instagram", href: "https://instagram.com/yourusername", icon: Instagram },
 ];
 
 export default function Footer({ id, className }: FooterProps) {
@@ -40,160 +32,116 @@ export default function Footer({ id, className }: FooterProps) {
     <footer
       id={id}
       className={clsx(
-        "relative overflow-hidden",
-        "bg-(--ds-paper) text-(--ds-ink)",
-        "border-t-[3px] border-(--ds-border-color)",
-
+        "relative overflow-hidden md:ml-17",
+        "bg-(--ds-paper-raised) text-(--ds-ink)",
         "px-6 md:px-16 lg:px-30",
-        "py-20",
-
-        "md:ml-17.5",
-
+        "pt-16 pb-32 md:pb-16",
         className
       )}
     >
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: `
-            linear-gradient(var(--ds-ink) 1px, transparent 1px),
-            linear-gradient(90deg, var(--ds-ink) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      {[
-        "top-6 left-6 border-t-[3px] border-l-[3px]",
-        "top-6 right-6 border-t-[3px] border-r-[3px]",
-        "bottom-6 left-6 border-b-[3px] border-l-[3px]",
-        "bottom-6 right-6 border-b-[3px] border-r-[3px]",
-      ].map((pos, i) => (
-        <div
-          key={i}
-          className={`absolute w-6 h-6 border-(--ds-ink) ${pos}`}
-        />
-      ))}
-
-      <div className="relative z-10 flex flex-col gap-14">
+      <div className="relative z-10 flex flex-col gap-12">
         <div className="flex flex-col lg:flex-row gap-12 justify-between">
+
+          {/* Left: Contact CTA */}
           <div className="max-w-xl">
-
-            <div className="relative inline-block mb-5">
-              <div className="absolute top-2 left-2 w-full h-full bg-(--ds-ink) -z-10" />
-
-              <Title
-                as="h2"
-                className="
-                  relative
-                  px-4 py-2
-                  border-[3px]
-                  border-(--ds-ink)
-                  bg-(--ds-paper-raised)
-                "
-              >
-                Contact Me
-              </Title>
+            <div className="flex items-center gap-3 mb-4">
+              <MessageSquare size={22} className="text-(--ds-ink)" />
+              <Title as="h2">Contact Me</Title>
             </div>
 
-            <p className="text-(--ds-ink)/60 leading-relaxed text-sm md:text-base max-w-lg">
-              Interested in working together, building products, or just
-              having a conversation about development and design? Feel free
-              to reach out anytime.
-            </p>
-
-            <div className="mt-7">
-              <Button
-                variant="primary"
-                shadow="md"
-                rightIcon={<ArrowUpRight size={16} />}
-              >
-                Say Hello
-              </Button>
+            <div className="border-l-[4px] pl-5 mb-6" style={{ borderColor: "var(--mc-green-mid)" }}>
+              <p className="leading-relaxed text-sm md:text-base text-(--ds-ink-muted)">
+                Interested in working together, building products, or just having a
+                conversation about development and design? Feel free to reach out
+                anytime — I&apos;m always open to new opportunities and collaborations.
+              </p>
             </div>
+
+            <Button variant="primary" rightIcon={<ArrowUpRight size={16} />}>
+              Say Hello
+            </Button>
           </div>
 
-          <div className="flex flex-col gap-5 min-w-65">
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] opacity-40 mb-2">
-                Email
-              </p>
+          {/* Right: Email + Socials */}
+          <div className="flex flex-col gap-8 min-w-[260px]">
 
+            {/* Email */}
+            <div>
+              <div className="flex items-center gap-2 mb-2 text-(--ds-ink-muted) uppercase tracking-widest text-xs">
+                <Mail size={12} />
+                <span style={{ fontFamily: "var(--font-body, sans-serif)" }}>Email</span>
+              </div>
               <Link
                 href="mailto:your@email.com"
-                className="
-                  inline-flex items-center gap-2
-                  font-black text-lg
-                  hover:opacity-70
-                  transition-opacity
-                "
+                className="font-bold text-lg hover:underline text-(--ds-ink) transition-all"
+                style={{ fontFamily: "var(--font-body, sans-serif)" }}
               >
-                <Mail size={18} />
                 your@email.com
               </Link>
             </div>
 
+            {/* Socials */}
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] opacity-40 mb-3">
-                Socials
-              </p>
-
-              <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 mb-3 text-(--ds-ink-muted) uppercase tracking-widest text-xs">
+                <Globe size={12} />
+                <span style={{ fontFamily: "var(--font-body, sans-serif)" }}>Socials</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
                 {socials.map((social) => {
                   const Icon = social.icon;
-
                   return (
                     <Link
                       key={social.label}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="
-                        flex items-center gap-2
-                        px-4 py-2
-                        border-[3px]
-                        border-(--ds-border-color)
-                        bg-(--ds-paper-raised)
-
-                        hover:bg-(--ds-ink)
-                        hover:text-(--ds-paper)
-
-                        transition-colors duration-150
-                        font-bold text-sm
-                      "
+                      className="mc-button-clean mc-button-clean-outline !py-1.5 !px-3.5 !text-xs"
                     >
-                      <Icon size={16} />
+                      <Icon size={14} className="mr-1.5 inline" />
                       {social.label}
                     </Link>
                   );
                 })}
               </div>
             </div>
+
           </div>
         </div>
 
-        <div
-          className="
-            pt-6
-            border-t-[3px]
-            border-dashed
-            border-(--ds-border-color)/20
+        {/* Bottom bar */}
+        <div className="pt-6 border-t border-(--ds-border-color)/10">
+          {/* XP progress bar */}
+          <div className="w-full h-2 mb-6 bg-(--ds-paper)">
+            <div
+              className="h-full"
+              style={{
+                width: "72%",
+                background: "linear-gradient(90deg, var(--mc-green-dark), var(--mc-green-mid))",
+              }}
+            />
+          </div>
 
-            flex flex-col md:flex-row
-            items-center justify-between
-            gap-4
-          "
-        >
-          <p className="text-xs md:text-sm opacity-45">
-            © 2026 Your Name — Crafted with Next.js & Tailwind CSS
-          </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p
+              className="text-xs text-(--ds-ink-muted)"
+              style={{ fontFamily: "var(--font-body, sans-serif)" }}
+            >
+              © 2026 Arkadani Fathir Fahrezi — Built with Next.js & ❤️
+            </p>
 
-          <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 bg-green-500 border border-(--ds-ink)" />
-
-            <span className="text-xs uppercase tracking-[0.2em] opacity-45">
-              Available for freelance
-            </span>
+            <div className="flex items-center gap-2">
+              <Circle
+                size={8}
+                className="mc-pulse"
+                style={{ fill: "var(--mc-emerald)", color: "var(--mc-emerald)" }}
+              />
+              <span
+                className="text-xs uppercase tracking-widest text-(--ds-ink-muted)"
+                style={{ fontFamily: "var(--font-body, sans-serif)" }}
+              >
+                Available for freelance
+              </span>
+            </div>
           </div>
         </div>
       </div>

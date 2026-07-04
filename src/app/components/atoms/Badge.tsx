@@ -4,8 +4,6 @@ import {
   type BadgeVariant,
   badgeVariantStyles,
   badgeDotVariants,
-  shadowLayer,
-  baseBorder,
 } from "@/app/utils/Tokens"
 
 interface BadgeProps {
@@ -19,23 +17,32 @@ export default function Badge({
   children,
   variant = "default",
   dot = false,
+  className,
 }: BadgeProps) {
   return (
-    <div className="relative inline-block">
-      <div className={clsx(shadowLayer, "top-0.5 left-0.5")} />
-
-      <span
-        className={clsx(
-          "relative flex items-center gap-2 px-3 py-1 text-sm font-bold border-(length:--ds-border-width) rounded-sm",
-          baseBorder,
-          badgeVariantStyles[variant]
-        )}
-      >
-        {dot && (
-          <span className={clsx("w-2 h-2 rounded-full", badgeDotVariants[variant])} />
-        )}
-        {children}
-      </span>
-    </div>
+    <span
+      className={clsx(
+        "inline-flex items-center gap-1.5 px-2.5 py-0.5",
+        "text-[10px] font-bold uppercase tracking-wider",
+        "border-2 border-(--ds-border-color)",
+        badgeVariantStyles[variant],
+        className
+      )}
+      style={{
+        fontFamily: "var(--font-body, sans-serif)",
+        imageRendering: "pixelated",
+        boxShadow: "2px 2px 0 var(--ds-shadow-color)",
+      }}
+    >
+      {dot && (
+        <span
+          className={clsx(
+            "w-1.5 h-1.5 rounded-none border border-black/20",
+            badgeDotVariants[variant]
+          )}
+        />
+      )}
+      {children}
+    </span>
   )
 }

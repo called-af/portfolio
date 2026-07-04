@@ -1,19 +1,8 @@
 import { ButtonHTMLAttributes, ReactNode } from "react"
 import clsx from "clsx"
-import {
-  type ButtonVariant,
-  type Shadow,
-  buttonVariantStyles,
-  shadowOffset,
-  hoverTranslate,
-  shadowLayer,
-  baseBorder,
-  motionBase,
-} from "@/app/utils/Tokens"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant
-  shadow?: Shadow
+  variant?: "primary" | "secondary" | "outline" | "danger"
   isLoading?: boolean
   leftIcon?: ReactNode
   rightIcon?: ReactNode
@@ -22,7 +11,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   children,
   variant = "primary",
-  shadow = "sm",
   isLoading = false,
   disabled,
   leftIcon,
@@ -33,30 +21,24 @@ export default function Button({
   const isDisabled = disabled || isLoading
 
   return (
-    <div className="relative inline-block">
-      <div className={clsx(shadowLayer, shadowOffset[shadow])} />
-
-      <button
-        disabled={isDisabled}
-        className={clsx(
-          "relative inline-flex items-center gap-2 px-4 py-2 border-(length:--ds-border-width) rounded-sm font-medium",
-          baseBorder,
-          motionBase,
-          !isDisabled && hoverTranslate[shadow],
-          buttonVariantStyles[variant],
-          isDisabled && "opacity-50 cursor-not-allowed",
-          className
-        )}
-        {...props}
-      >
-        {isLoading ? "Loading..." : (
-          <>
-            {leftIcon && <span>{leftIcon}</span>}
-            {children}
-            {rightIcon && <span>{rightIcon}</span>}
-          </>
-        )}
-      </button>
-    </div>
+    <button
+      disabled={isDisabled}
+      className={clsx(
+        "mc-button-clean",
+        `mc-button-clean-${variant}`,
+        isDisabled && "opacity-50 cursor-not-allowed",
+        className
+      )}
+      style={{ fontFamily: "var(--font-body, sans-serif)" }}
+      {...props}
+    >
+      {isLoading ? "Loading..." : (
+        <>
+          {leftIcon && <span className="flex items-center shrink-0">{leftIcon}</span>}
+          <span>{children}</span>
+          {rightIcon && <span className="flex items-center shrink-0">{rightIcon}</span>}
+        </>
+      )}
+    </button>
   )
 }

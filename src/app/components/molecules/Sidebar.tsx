@@ -7,18 +7,11 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 const links = [
-  { icon: Home, label: "Profile", link: "#profile" },
-  { icon: User, label: "About", link: "#about" },
+  { icon: Home,         label: "Home",     link: "#profile" },
   { icon: BookOpenText, label: "Projects", link: "#project" },
-  { icon: Phone, label: "Contact", link: "#contact" },
+  { icon: User,         label: "About",    link: "#about"   },
+  { icon: Phone,        label: "Contact",  link: "#contact" },
 ];
-
-const colorMap: Record<string, string> = {
-  profile: "bg-(--ds-info-bg) text-(--ds-info-text)",
-  about: "bg-(--ds-purple-bg) text-(--ds-purple-text)",
-  project: "bg-(--ds-warning-bg) text-(--ds-warning-text)",
-  contact: "bg-(--ds-danger-bg) text-(--ds-danger-text)",
-};
 
 export function Sidebar({
   label,
@@ -36,9 +29,7 @@ export function Sidebar({
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     const ids = links.map((l) => l.link.replace("#", ""));
-    if (hash && ids.includes(hash)) {
-      setActiveId(hash);
-    }
+    if (hash && ids.includes(hash)) setActiveId(hash);
   }, []);
 
   useEffect(() => {
@@ -50,7 +41,6 @@ export function Sidebar({
       const viewportMid = window.innerHeight * 0.4;
       let closest = sections[0];
       let closestDist = Infinity;
-
       sections.forEach((sec) => {
         const rect = sec.getBoundingClientRect();
         const dist = Math.abs(rect.top - viewportMid);
@@ -59,112 +49,106 @@ export function Sidebar({
           closest = sec;
         }
       });
-
       return closest?.id ?? "profile";
     };
 
     setActiveId(getActiveSection());
-
-    const handleScroll = () => {
-      setActiveId(getActiveSection());
-    };
-
+    const handleScroll = () => setActiveId(getActiveSection());
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLink = (link: string) => {
-    const id = link.replace("#", "");
-    const isActive = activeId === id;
-
-    return clsx(
-      `w-11 h-11 flex items-center justify-center
-       border-[length:var(--ds-border-width)]
-       border-[color:var(--ds-border-color)]
-       transition-all duration-150`,
-      isActive
-        ? `${colorMap[id] ?? ""}
-           -translate-x-[2px] -translate-y-[2px]
-           shadow-[5px_5px_0_var(--ds-shadow-color)]`
-        : `bg-(--ds-paper) text-(--ds-ink)
-           shadow-[3px_3px_0_var(--ds-shadow-color)]
-           hover:-translate-x-[2px] hover:-translate-y-[2px]
-           hover:shadow-[5px_5px_0_var(--ds-shadow-color)]`
-    );
-  };
 
   const activeLabel = links.find((l) => l.link === `#${activeId}`)?.label;
 
+  /* Nav link — uses mc-button-clean exactly like atoms/Button */
+  const NavLink = ({ icon: Icon, link }: { icon: React.ElementType; link: string }) => {
+    const id = link.replace("#", "");
+    const isActive = activeId === id;
+
+    return (
+      <Link
+        href={link}
+        aria-label={id}
+        className={clsx(
+          "mc-button-clean",
+          "w-11 h-11 !p-0",          // square, override padding
+          isActive
+            ? "mc-button-clean-primary"
+            : "mc-button-clean-outline"
+        )}
+      >
+        <Icon size={18} />
+      </Link>
+    );
+  };
+
+  /* Theme toggle — same mc-button-clean style */
   const ThemeButton = ({ className: btnClass }: { className?: string }) => (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
       className={clsx(
-        `w-11 h-11 flex items-center justify-center z-10
-         border-(length:--ds-border-width)
-         border-(--ds-border-color)
-         bg-(--ds-paper)
-         shadow-[3px_3px_0_var(--ds-shadow-color)]
-         hover:-translate-x-0.5 hover:-translate-y-0.5
-         hover:shadow-[5px_5px_0_var(--ds-shadow-color)]
-         transition-all`,
+        "mc-button-clean mc-button-clean-outline",
+        "w-11 h-11 !p-0",
         btnClass
       )}
-      aria-label="Toggle theme"
     >
-      {mounted ? (
-        resolvedTheme === "dark" ? <Moon size={20} /> : <Sun size={20} />
-      ) : null}
+      {mounted
+        ? resolvedTheme === "dark"
+          ? <Moon size={18} />
+          : <Sun size={18} />
+        : null}
     </button>
   );
 
   return (
     <>
+      {/* Desktop sidebar */}
       <aside
         className={clsx(
-          `hidden md:flex fixed left-0 top-0 h-screen w-17.5
-           bg-(--ds-paper)
-           border-r-(length:--ds-border-width)
-           border-r-(--ds-border-color)`,
+          "hidden md:flex fixed left-0 top-0 h-screen w-17",
+          "bg-(--ds-paper-raised)",
+          "transition-colors duration-200",
           className
         )}
       >
         <div className="h-full flex flex-col justify-between items-center py-6 w-full">
-          <ul className="flex flex-col gap-6">
-            {links.map(({ icon: Icon, link }) => (
+
+          {/* Nav links */}
+          <ul className="flex flex-col gap-4">
+            {links.map(({ icon, link }) => (
               <li key={link}>
-                <Link href={link} className={navLink(link)} aria-label={link.replace("#", "")}>
-                  <Icon size={20} />
-                </Link>
+                <NavLink icon={icon} link={link} />
               </li>
             ))}
           </ul>
 
-          <div className="rotate-90 text-xs font-bold tracking-widest uppercase text-(--ds-ink-muted)">
-            {label ?? activeLabel ?? "404"}
+          {/* Active label — rotated */}
+          <div
+            className="rotate-90 whitespace-nowrap text-xs font-bold tracking-widest uppercase text-(--ds-ink-muted)"
+            style={{ fontFamily: "var(--font-body, sans-serif)" }}
+          >
+            {label ?? activeLabel ?? "—"}
           </div>
 
+          {/* Theme toggle */}
           <ThemeButton />
         </div>
       </aside>
 
+      {/* Mobile bottom nav */}
       <nav
         className={clsx(
-          `md:hidden fixed bottom-0 left-0 right-0 z-50
-           bg-(--ds-paper)
-           border-t-(length:--ds-border-width)
-           border-t-(--ds-border-color)`,
+          "md:hidden fixed bottom-0 left-0 right-0 z-50",
+          "bg-(--ds-paper-raised)",
+          "transition-colors duration-200",
           className
         )}
       >
         <ul className="flex justify-around items-center py-3">
-          {links.map(({ icon: Icon, link }) => (
+          {links.map(({ icon, link }) => (
             <li key={link}>
-              <Link href={link} className={navLink(link)} aria-label={link.replace("#", "")}>
-                <Icon size={20} />
-              </Link>
+              <NavLink icon={icon} link={link} />
             </li>
           ))}
           <li>

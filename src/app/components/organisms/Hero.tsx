@@ -1,5 +1,6 @@
 import Button from "@/app/components/atoms/Button"
 import Badge from "@/app/components/atoms/Badge"
+import { ArrowRight, ArrowDown } from "lucide-react"
 
 type HeroProps = {
   id: string;
@@ -11,119 +12,153 @@ export default function Hero({ id, className }: HeroProps) {
     <section
       id={id}
       className={`
-    relative h-screen
-    flex flex-col items-center justify-center
-    bg-(--ds-paper) text-(--ds-ink)
-    border-b-[3px] border-(--ds-border-color)
-    overflow-hidden
-
-    px-6 py-24
-    md:ml-17.5
-
-    ${className || ""}
-  `}
+        relative min-h-screen
+        flex flex-col items-center justify-center
+        bg-(--ds-paper) text-(--ds-ink)
+        overflow-hidden
+        px-6 py-24
+        md:ml-17
+        ${className || ""}
+      `}
     >
+      {/* Light mode: pixel grid fades out toward bottom */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        className="absolute inset-0 z-0 dark:hidden pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(var(--ds-ink) 1px, transparent 1px),
-            linear-gradient(90deg, var(--ds-ink) 1px, transparent 1px)
+            linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)
           `,
-          backgroundSize: "40px 40px",
+          backgroundSize: "32px 32px",
+          maskImage: "linear-gradient(to bottom, black 0%, black 25%, transparent 80%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 25%, transparent 80%)",
         }}
       />
 
-      {[
-        "top-7 left-7 border-t-[3px] border-l-[3px]",
-        "top-7 right-7 border-t-[3px] border-r-[3px]",
-        "bottom-7 left-7 border-b-[3px] border-l-[3px]",
-        "bottom-7 right-7 border-b-[3px] border-r-[3px]",
-      ].map((pos, i) => (
-        <div
-          key={i}
-          className={`absolute w-7 h-7 border-(--ds-ink) ${pos}`}
-        />
-      ))}
+      {/* Dark mode: deep night */}
+      <div
+        className="absolute inset-0 z-0 hidden dark:block pointer-events-none"
+        style={{ background: "#111111" }}
+      />
 
+      {/* Dark mode: green top glow */}
+      <div
+        className="absolute top-0 left-0 right-0 h-64 z-0 hidden dark:block pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 100% at 50% 0%, rgba(61,178,19,0.12) 0%, transparent 80%)",
+        }}
+      />
 
-      <div className="relative flex flex-col items-center text-center max-w-2xl w-full">
+      {/* Stars — dark mode only */}
+      <div className="absolute inset-0 z-0 hidden dark:block pointer-events-none">
+        {[
+          { t: 5, l: 12 }, { t: 8, l: 35 }, { t: 3, l: 58 }, { t: 12, l: 80 }, { t: 6, l: 93 },
+          { t: 15, l: 22 }, { t: 18, l: 47 }, { t: 10, l: 68 }, { t: 20, l: 5 }, { t: 22, l: 90 },
+          { t: 25, l: 38 }, { t: 7, l: 75 }, { t: 30, l: 15 }, { t: 14, l: 55 }, { t: 28, l: 65 },
+          { t: 4, l: 42 }, { t: 16, l: 8 }, { t: 9, l: 85 }, { t: 32, l: 50 }, { t: 2, l: 28 },
+        ].map((s, i) => (
+          <div
+            key={i}
+            className="absolute w-[2px] h-[2px] bg-white/50"
+            style={{ top: `${s.t}%`, left: `${s.l}%` }}
+          />
+        ))}
+      </div>
 
-        <Badge variant="success" dot className="mb-5">
+      {/* ======= CONTENT ======= */}
+      <div className="relative z-10 flex flex-col items-center text-center max-w-2xl w-full gap-6">
+
+        {/* Status */}
+        <Badge variant="success" dot>
           Open to opportunities
         </Badge>
 
-        <div className="relative px-10 py-7 mb-2 w-full">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-(--ds-ink)/10" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-(--ds-ink)/10" />
+        {/* Greeting */}
+        <div className="flex flex-col items-center gap-2">
+          <p
+            className="text-(--ds-ink-muted) text-sm uppercase tracking-[0.2em] font-bold"
+            style={{ fontFamily: "var(--font-body, sans-serif)" }}
+          >
+            Hi, I&apos;m
+          </p>
 
           <h1
-            className="font-black uppercase leading-[0.88] tracking-tight"
+            className="text-(--ds-ink) uppercase leading-none tracking-tight"
             style={{
-              fontFamily: "var(--font-display, 'Orbitron', sans-serif)",
-              fontSize: "clamp(2.8rem, 8vw, 5.6rem)",
+              fontFamily: "var(--font-display, monospace)",
+              fontSize: "clamp(2.2rem, 8vw, 5rem)",
+              textShadow: "4px 4px 0 rgba(0,0,0,0.12)",
             }}
           >
-            <span className="block">Crafting</span>
-            <span
-              className="block opacity-40"
+            Arkadani Fathir Fahrezi
+          </h1>
+
+          {/* Role — with green accent lines */}
+          <div className="flex items-center gap-3 mt-1">
+            <div className="h-[3px] w-10" style={{ background: "var(--mc-green-mid)" }} />
+            <p
+              className="uppercase font-bold tracking-widest"
               style={{
-                WebkitTextStroke: "2px var(--ds-ink)",
-                color: "transparent",
-                fontSize: "0.9em",
+                fontFamily: "var(--font-body, sans-serif)",
+                fontSize: "clamp(0.75rem, 1.8vw, 0.95rem)",
+                color: "var(--mc-green-mid)",
+                letterSpacing: "0.12em",
               }}
             >
-              The Web,
-            </span>
-            <span className="block">
-              One{" "}
-              <span className="relative inline-block">
-                Pixel
-                <span className="absolute -bottom-1 left-0 right-0 h-1.25 bg-(--ds-ink)" />
-              </span>
-            </span>
-          </h1>
+              Full-Stack Web Developer
+            </p>
+            <div className="h-[3px] w-10" style={{ background: "var(--mc-green-mid)" }} />
+          </div>
         </div>
 
-        <p className="text-sm text-(--ds-ink)/45 max-w-xs leading-relaxed font-light mb-7">
-          Clean code, thoughtful design, and seamless experiences —
-          from first sketch to final deployment.
+        {/* Bio */}
+        <p
+          className="text-(--ds-ink-muted) text-sm md:text-base leading-relaxed max-w-lg"
+          style={{ fontFamily: "var(--font-body, sans-serif)" }}
+        >
+          I build clean, responsive web experiences — from pixel-perfect UIs to
+          robust back-ends. I care about the details: good code structure, thoughtful
+          design, and products that actually feel good to use.
         </p>
 
-        <div className="flex flex-wrap gap-3 justify-center mb-9">
-          <Button variant="primary" shadow="md" rightIcon={<span>→</span>}>
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 justify-center mt-2">
+          <Button variant="primary" rightIcon={<ArrowRight size={16} />}>
             Contact Me
           </Button>
-          <Button variant="secondary" shadow="sm">
-            View Portfolio
+          <Button variant="outline" rightIcon={<ArrowDown size={16} />}>
+            See My Work
           </Button>
         </div>
 
-        <div className="grid grid-cols-3 w-full max-w-sm border-2 border-(--ds-ink)/14">
+        {/* Divider + quick facts */}
+        <div
+          className="w-full border-t-2 border-(--ds-border-color)/20 pt-6 mt-2
+                     flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
+        >
           {[
-            { v: "2+", l: "Years" },
-            { v: "10+", l: "Projects" },
-            { v: "3+", l: "Clients" },
-          ].map((s, i) => (
-            <div
-              key={s.l}
-              className={`flex flex-col items-center py-4 px-3 ${i < 2 ? "border-r-2 border-(--ds-ink)/14" : ""}`}
-            >
-              <p
-                className="text-[26px] font-black leading-tight"
-                style={{ fontFamily: "var(--font-display, 'Orbitron', sans-serif)" }}
+            { label: "Based in",   value: "Indonesia" },
+            { label: "Focus",      value: "Web Dev" },
+            { label: "Experience", value: "2+ Years" },
+            { label: "Status",     value: "Freelance" },
+          ].map((f) => (
+            <div key={f.label} className="flex flex-col items-center gap-0.5">
+              <span
+                className="text-[10px] uppercase tracking-widest text-(--ds-ink-muted)"
+                style={{ fontFamily: "var(--font-body, sans-serif)" }}
               >
-                {s.v}
-              </p>
-              <p
-                className="text-[9px] uppercase tracking-[0.2em] text-(--ds-ink)/28 mt-1 font-medium"
-                style={{ fontFamily: "var(--font-mono, 'Share Tech Mono', monospace)" }}
+                {f.label}
+              </span>
+              <span
+                className="text-sm font-black text-(--ds-ink)"
+                style={{ fontFamily: "var(--font-body, sans-serif)" }}
               >
-                {s.l}
-              </p>
+                {f.value}
+              </span>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

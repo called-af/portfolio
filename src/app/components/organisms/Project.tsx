@@ -7,130 +7,96 @@ import Title from "@/app/components/atoms/Title";
 import Badge from "@/app/components/atoms/Badge";
 import Button from "@/app/components/atoms/Button";
 import { projects, type ProjectType } from "@/app/data/project";
-import {
-  type CardVariant,
-  shadowLayer,
-  shadowOffset,
-  motionBase,
-  hoverTranslate,
-  cardVariantStyles,
-} from "@/app/utils/Tokens";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, FolderOpen, ArrowRight } from "lucide-react";
 
 type ProjectProps = {
   id: string;
   className?: string;
 };
 
-const cardColors: CardVariant[] = ["yellow", "teal", "coral", "purple"];
-
 const linkIcons: Record<string, React.ReactNode> = {
-  Demo: <ExternalLink size={14} />,
-  GitHub: <Github size={14} />,
-  Docs: <ExternalLink size={14} />,
+  Demo:   <ExternalLink size={11} />,
+  GitHub: <Github size={11} />,
+  Docs:   <ExternalLink size={11} />,
 };
 
-function ProjectCard({
+function ProjectRow({
   project,
   index,
 }: {
   project: ProjectType;
   index: number;
 }) {
-  const variant = cardColors[index % cardColors.length];
-  const isLarge = index === 0 || index === 3;
-
   return (
-    <div
-      className={clsx(
-        "relative group",
-        isLarge && "md:col-span-2 md:row-span-2"
-      )}
-    >
-      {/* Neo-brutal shadow layer */}
-      <div className={clsx(shadowLayer, shadowOffset.md)} />
+    <div className="group flex flex-col sm:flex-row gap-0 border-t-2 border-(--ds-border-color)/20 hover:bg-(--ds-ink)/[0.03] transition-colors duration-100 py-5 px-2 -mx-2">
 
-      <div
-        className={clsx(
-          "relative flex flex-col h-full overflow-hidden rounded-md",
-          "border-(length:--ds-border-width)",
-          "border-(--ds-border-color)",
-          motionBase,
-          hoverTranslate.md,
-          cardVariantStyles[variant]
-        )}
+      {/* Index */}
+      <span
+        className="text-5xl font-black text-(--ds-ink) opacity-10 select-none shrink-0 w-14 leading-none -mt-1"
+        style={{ fontFamily: "var(--font-body, sans-serif)" }}
       >
-        {/* Image */}
-        <div
-          className={clsx(
-            "relative w-full flex-1 min-h-40",
-          )}
-        >
-          <Image
-            src={project.img}
-            alt={project.title}
-            fill
-            className={clsx(
-              "object-cover",
-              motionBase,
-              "group-hover:scale-[1.03]"
-            )}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
+        {String(index + 1).padStart(2, "0")}
+      </span>
 
-          {/* Category badge overlay */}
-          <div className="absolute top-3 left-3 z-10">
-            <Badge variant="default">{project.category}</Badge>
-          </div>
-        </div>
-
-        {/* Content */}
+      {/* Thumbnail */}
+      <div
+        className="relative shrink-0 w-full sm:w-72 h-48 overflow-hidden border-2 border-(--ds-border-color)/30 mr-6 mb-3 sm:mb-0"
+        style={{ imageRendering: "pixelated" }}
+      >
+        <Image
+          src={project.img}
+          alt={project.title}
+          fill
+          className="object-cover"
+          sizes="288px"
+        />
         <div
-          className={clsx(
-            "p-4",
-          )}
-        >
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
+            backgroundSize: "4px 4px",
+          }}
+        />
+      </div>
+
+      {/* Details */}
+      <div className="flex-1 min-w-0 flex flex-col justify-between gap-2">
+        <div className="flex flex-wrap items-start justify-between gap-2">
           <h3
             className="font-black text-lg text-(--ds-ink) leading-tight"
-            style={{ fontFamily: "var(--font-orbitron)" }}
+            style={{ fontFamily: "var(--font-body, sans-serif)" }}
           >
             {project.title}
           </h3>
+          <Badge variant="default">{project.category}</Badge>
+        </div>
 
-          <p
-            className={clsx(
-              "text-sm text-(--ds-ink) opacity-60 leading-relaxed mt-1",
-              isLarge ? "line-clamp-3" : "line-clamp-2"
-            )}
-          >
-            {project.desc}
-          </p>
+        <p className="text-sm text-(--ds-ink-muted) leading-relaxed line-clamp-3">
+          {project.desc}
+        </p>
 
-          {/* Links */}
-          <div className="flex gap-2 mt-3 flex-wrap">
-            {project.links.map((link) => (
-              <Link
-                key={link.label}
-                href={link.url}
-                className={clsx(
-                  "inline-flex items-center gap-1.5",
-                  "px-2.5 py-1 text-xs font-bold",
-                  "border-(length:--ds-border-width)",
-                  "border-(--ds-border-color)",
-                  "bg-(--ds-paper-raised) text-(--ds-ink)",
-                  "hover:bg-(--ds-ink) hover:text-(--ds-paper)",
-                  "transition-colors duration-150"
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {linkIcons[link.label] ?? <ExternalLink size={14} />}
-                {link.label}
-              </Link>
-            ))}
-          </div>
+        <div className="flex gap-2 flex-wrap">
+          {project.links.map((link) => (
+            <Link
+              key={link.label}
+              href={link.url}
+              className="mc-button-clean mc-button-clean-outline !py-0.5 !px-2.5 !text-[10px]"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {linkIcons[link.label] ?? <ExternalLink size={11} />}
+              <span className="ml-1">{link.label}</span>
+            </Link>
+          ))}
         </div>
       </div>
+
+      {/* Green accent bar on hover */}
+      <div
+        className="hidden sm:block w-[3px] self-stretch ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-100 shrink-0"
+        style={{ background: "var(--mc-green-mid)" }}
+      />
     </div>
   );
 }
@@ -140,45 +106,42 @@ export default function Projects({ id, className }: ProjectProps) {
     <section
       id={id}
       className={clsx(
-        " min-h-screen",
+        "min-h-screen md:ml-17",
         "px-6 md:px-16 lg:px-30",
-        "py-10 pb-20 md:pb-10",
+        "py-16 pb-24 md:pb-16",
         className
       )}
+      style={{ background: "var(--ds-paper)" }}
     >
-      <div className="max-w-3xl mb-10">
-        <div className="flex flex-wrap items-center gap-4 mb-4">
-          <div className="relative inline-block">
-            <div className="absolute top-2 left-2 w-full h-full bg-(--ds-ink) rounded-sm -z-10" />
-            <Title
-              as="h2"
-              className={clsx(
-                "relative px-3 py-1",
-                "bg-(--ds-paper-raised)",
-                "border-2 border-(--ds-ink)"
-              )}
-            >
-              Project
-            </Title>
-          </div>
+      {/* Header */}
+      <div className="mb-10">
+        <div className="flex items-center gap-3 mb-2">
+          <FolderOpen size={20} className="text-(--ds-ink)" />
+          <Title as="h2">What I&apos;ve Been Working On</Title>
         </div>
-
-        <p className="text-(--ds-ink) opacity-50 text-base md:text-lg leading-relaxed max-w-xl">
-          A collection of projects I&apos;ve built — from web apps to security
-          tools.
+        <div className="flex gap-[3px] mb-4">
+          <div className="h-[4px] w-16" style={{ background: "var(--mc-grass-top)" }} />
+          <div className="h-[4px] w-8"  style={{ background: "var(--mc-stone)" }} />
+          <div className="h-[4px] w-4"  style={{ background: "var(--mc-cobble)" }} />
+        </div>
+        <p
+          className="text-(--ds-ink-muted) text-base max-w-xl"
+          style={{ fontFamily: "var(--font-body, sans-serif)" }}
+        >
+          A collection of projects I&apos;ve built — from web apps to security tools.
         </p>
       </div>
 
-      {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[260px] gap-5">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
+      {/* All projects — uniform list rows */}
+      <div className="border-b-2 border-(--ds-border-color)/20">
+        {projects.map((project, i) => (
+          <ProjectRow key={project.id} project={project} index={i} />
         ))}
       </div>
 
       {/* CTA */}
-      <div className="mt-10 flex justify-center">
-        <Button variant="outline" shadow="md" rightIcon={<span>→</span>}>
+      <div className="mt-10 flex justify-start">
+        <Button variant="outline" rightIcon={<ArrowRight size={14} />}>
           View All Projects
         </Button>
       </div>
