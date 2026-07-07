@@ -9,7 +9,7 @@ import {
   ArrowUpRight,
   MessageSquare,
   Globe,
-  Circle
+  Circle,
 } from "lucide-react";
 
 import Button from "@/app/components/atoms/Button";
@@ -22,9 +22,13 @@ type FooterProps = {
 };
 
 const socials = [
-  { label: "GitHub",    href: "https://github.com/yourusername",    icon: Github    },
-  { label: "LinkedIn",  href: "https://linkedin.com/in/yourusername", icon: Linkedin },
-  { label: "Instagram", href: "https://instagram.com/yourusername", icon: Instagram },
+  { label: "GitHub", href: "https://github.com/called-af", icon: Github },
+  // { label: "LinkedIn",  href: "https://linkedin.com/in/yourusername", icon: Linkedin },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/called_af",
+    icon: Instagram,
+  },
 ];
 
 export default function Footer({ id, className }: FooterProps) {
@@ -36,12 +40,11 @@ export default function Footer({ id, className }: FooterProps) {
         "bg-(--ds-paper-raised) text-(--ds-ink)",
         "px-6 md:px-16 lg:px-30",
         "pt-16 pb-32 md:pb-16",
-        className
+        className,
       )}
     >
       <div className="relative z-10 flex flex-col gap-12">
         <div className="flex flex-col lg:flex-row gap-12 justify-between">
-
           {/* Left: Contact CTA */}
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-4">
@@ -49,34 +52,40 @@ export default function Footer({ id, className }: FooterProps) {
               <Title as="h2">Contact Me</Title>
             </div>
 
-            <div className="border-l-[4px] pl-5 mb-6" style={{ borderColor: "var(--mc-green-mid)" }}>
+            <div
+              className="border-l-[4px] pl-5 mb-6"
+              style={{ borderColor: "var(--mc-green-mid)" }}
+            >
               <p className="leading-relaxed text-sm md:text-base text-(--ds-ink-muted)">
-                Interested in working together, building products, or just having a
-                conversation about development and design? Feel free to reach out
-                anytime — I&apos;m always open to new opportunities and collaborations.
+                Interested in working together, building products, or just
+                having a conversation about development and design? Feel free to
+                reach out anytime — I&apos;m always open to new opportunities
+                and collaborations.
               </p>
             </div>
-
-            <Button variant="primary" rightIcon={<ArrowUpRight size={16} />}>
-              Say Hello
-            </Button>
+            <Link href="mailto:arkadanisaysstuff@email.com">
+              <Button variant="primary" rightIcon={<ArrowUpRight size={16} />}>
+                Say Hello
+              </Button>
+            </Link>
           </div>
 
           {/* Right: Email + Socials */}
           <div className="flex flex-col gap-8 min-w-[260px]">
-
             {/* Email */}
             <div>
               <div className="flex items-center gap-2 mb-2 text-(--ds-ink-muted) uppercase tracking-widest text-xs">
                 <Mail size={12} />
-                <span style={{ fontFamily: "var(--font-body, sans-serif)" }}>Email</span>
+                <span style={{ fontFamily: "var(--font-body, sans-serif)" }}>
+                  Email
+                </span>
               </div>
               <Link
-                href="mailto:your@email.com"
+                href="mailto:arkadanisaysstuff@email.com"
                 className="font-bold text-lg hover:underline text-(--ds-ink) transition-all"
                 style={{ fontFamily: "var(--font-body, sans-serif)" }}
               >
-                your@email.com
+                arkadanisaysstuff@email.com
               </Link>
             </div>
 
@@ -84,7 +93,9 @@ export default function Footer({ id, className }: FooterProps) {
             <div>
               <div className="flex items-center gap-2 mb-3 text-(--ds-ink-muted) uppercase tracking-widest text-xs">
                 <Globe size={12} />
-                <span style={{ fontFamily: "var(--font-body, sans-serif)" }}>Socials</span>
+                <span style={{ fontFamily: "var(--font-body, sans-serif)" }}>
+                  Socials
+                </span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {socials.map((social) => {
@@ -104,7 +115,6 @@ export default function Footer({ id, className }: FooterProps) {
                 })}
               </div>
             </div>
-
           </div>
         </div>
 
@@ -116,7 +126,8 @@ export default function Footer({ id, className }: FooterProps) {
               className="h-full"
               style={{
                 width: "72%",
-                background: "linear-gradient(90deg, var(--mc-green-dark), var(--mc-green-mid))",
+                background:
+                  "linear-gradient(90deg, var(--mc-green-dark), var(--mc-green-mid))",
               }}
             />
           </div>
@@ -126,14 +137,17 @@ export default function Footer({ id, className }: FooterProps) {
               className="text-xs text-(--ds-ink-muted)"
               style={{ fontFamily: "var(--font-body, sans-serif)" }}
             >
-              © 2026 Arkadani Fathir Fahrezi — Built with Next.js & ❤️
+              © 2026 Arkadani Fathir Fahrezi — Built with Next.js
             </p>
 
             <div className="flex items-center gap-2">
               <Circle
                 size={8}
                 className="mc-pulse"
-                style={{ fill: "var(--mc-emerald)", color: "var(--mc-emerald)" }}
+                style={{
+                  fill: "var(--mc-emerald)",
+                  color: "var(--mc-emerald)",
+                }}
               />
               <span
                 className="text-xs uppercase tracking-widest text-(--ds-ink-muted)"

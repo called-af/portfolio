@@ -1,6 +1,7 @@
-import Button from "@/app/components/atoms/Button"
-import Badge from "@/app/components/atoms/Badge"
-import { ArrowRight, ArrowDown } from "lucide-react"
+import Button from "@/app/components/atoms/Button";
+import Badge from "@/app/components/atoms/Badge";
+import { ArrowRight, ArrowDown } from "lucide-react";
+import Link from "next/link";
 
 type HeroProps = {
   id: string;
@@ -30,8 +31,10 @@ export default function Hero({ id, className }: HeroProps) {
             linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)
           `,
           backgroundSize: "32px 32px",
-          maskImage: "linear-gradient(to bottom, black 0%, black 25%, transparent 80%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 25%, transparent 80%)",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 25%, transparent 80%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 25%, transparent 80%)",
         }}
       />
 
@@ -45,17 +48,34 @@ export default function Hero({ id, className }: HeroProps) {
       <div
         className="absolute top-0 left-0 right-0 h-64 z-0 hidden dark:block pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 70% 100% at 50% 0%, rgba(61,178,19,0.12) 0%, transparent 80%)",
+          background:
+            "radial-gradient(ellipse 70% 100% at 50% 0%, rgba(61,178,19,0.12) 0%, transparent 80%)",
         }}
       />
 
       {/* Stars — dark mode only */}
       <div className="absolute inset-0 z-0 hidden dark:block pointer-events-none">
         {[
-          { t: 5, l: 12 }, { t: 8, l: 35 }, { t: 3, l: 58 }, { t: 12, l: 80 }, { t: 6, l: 93 },
-          { t: 15, l: 22 }, { t: 18, l: 47 }, { t: 10, l: 68 }, { t: 20, l: 5 }, { t: 22, l: 90 },
-          { t: 25, l: 38 }, { t: 7, l: 75 }, { t: 30, l: 15 }, { t: 14, l: 55 }, { t: 28, l: 65 },
-          { t: 4, l: 42 }, { t: 16, l: 8 }, { t: 9, l: 85 }, { t: 32, l: 50 }, { t: 2, l: 28 },
+          { t: 5, l: 12 },
+          { t: 8, l: 35 },
+          { t: 3, l: 58 },
+          { t: 12, l: 80 },
+          { t: 6, l: 93 },
+          { t: 15, l: 22 },
+          { t: 18, l: 47 },
+          { t: 10, l: 68 },
+          { t: 20, l: 5 },
+          { t: 22, l: 90 },
+          { t: 25, l: 38 },
+          { t: 7, l: 75 },
+          { t: 30, l: 15 },
+          { t: 14, l: 55 },
+          { t: 28, l: 65 },
+          { t: 4, l: 42 },
+          { t: 16, l: 8 },
+          { t: 9, l: 85 },
+          { t: 32, l: 50 },
+          { t: 2, l: 28 },
         ].map((s, i) => (
           <div
             key={i}
@@ -67,7 +87,6 @@ export default function Hero({ id, className }: HeroProps) {
 
       {/* ======= CONTENT ======= */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-2xl w-full gap-6">
-
         {/* Status */}
         <Badge variant="success" dot>
           Open to opportunities
@@ -95,7 +114,10 @@ export default function Hero({ id, className }: HeroProps) {
 
           {/* Role — with green accent lines */}
           <div className="flex items-center gap-3 mt-1">
-            <div className="h-[3px] w-10" style={{ background: "var(--mc-green-mid)" }} />
+            <div
+              className="h-[3px] w-10"
+              style={{ background: "var(--mc-green-mid)" }}
+            />
             <p
               className="uppercase font-bold tracking-widest"
               style={{
@@ -107,7 +129,10 @@ export default function Hero({ id, className }: HeroProps) {
             >
               Full-Stack Web Developer
             </p>
-            <div className="h-[3px] w-10" style={{ background: "var(--mc-green-mid)" }} />
+            <div
+              className="h-[3px] w-10"
+              style={{ background: "var(--mc-green-mid)" }}
+            />
           </div>
         </div>
 
@@ -117,18 +142,22 @@ export default function Hero({ id, className }: HeroProps) {
           style={{ fontFamily: "var(--font-body, sans-serif)" }}
         >
           I build clean, responsive web experiences — from pixel-perfect UIs to
-          robust back-ends. I care about the details: good code structure, thoughtful
-          design, and products that actually feel good to use.
+          robust back-ends. I care about the details: good code structure,
+          thoughtful design, and products that actually feel good to use.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-wrap gap-4 justify-center mt-2">
-          <Button variant="primary" rightIcon={<ArrowRight size={16} />}>
-            Contact Me
-          </Button>
-          <Button variant="outline" rightIcon={<ArrowDown size={16} />}>
-            See My Work
-          </Button>
+          <Link href="#contact" className="w-full md:w-auto">
+            <Button variant="primary" rightIcon={<ArrowRight size={16} />}>
+              Contact Me
+            </Button>
+          </Link>
+          <Link href="#project" className="w-full md:w-auto">
+            <Button variant="outline" rightIcon={<ArrowDown size={16} />}>
+              See My Work
+            </Button>
+          </Link>
         </div>
 
         {/* Divider + quick facts */}
@@ -137,10 +166,10 @@ export default function Hero({ id, className }: HeroProps) {
                      flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
         >
           {[
-            { label: "Based in",   value: "Indonesia" },
-            { label: "Focus",      value: "Web Dev" },
+            { label: "Based in", value: "Indonesia" },
+            { label: "Focus", value: "Web Dev" },
             { label: "Experience", value: "2+ Years" },
-            { label: "Status",     value: "Freelance" },
+            { label: "Status", value: "Freelance" },
           ].map((f) => (
             <div key={f.label} className="flex flex-col items-center gap-0.5">
               <span
@@ -158,7 +187,6 @@ export default function Hero({ id, className }: HeroProps) {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

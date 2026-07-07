@@ -15,9 +15,9 @@ type ProjectProps = {
 };
 
 const linkIcons: Record<string, React.ReactNode> = {
-  Demo:   <ExternalLink size={11} />,
+  Demo: <ExternalLink size={11} />,
   GitHub: <Github size={11} />,
-  Docs:   <ExternalLink size={11} />,
+  Docs: <ExternalLink size={11} />,
 };
 
 function ProjectRow({
@@ -29,7 +29,6 @@ function ProjectRow({
 }) {
   return (
     <div className="group flex flex-col sm:flex-row gap-0 border-t-2 border-(--ds-border-color)/20 hover:bg-(--ds-ink)/[0.03] transition-colors duration-100 py-5 px-2 -mx-2">
-
       {/* Index */}
       <span
         className="text-5xl font-black text-(--ds-ink) opacity-10 select-none shrink-0 w-14 leading-none -mt-1"
@@ -109,7 +108,7 @@ export default function Projects({ id, className }: ProjectProps) {
         "min-h-screen md:ml-17",
         "px-6 md:px-16 lg:px-30",
         "py-16 pb-24 md:pb-16",
-        className
+        className,
       )}
       style={{ background: "var(--ds-paper)" }}
     >
@@ -120,15 +119,25 @@ export default function Projects({ id, className }: ProjectProps) {
           <Title as="h2">What I&apos;ve Been Working On</Title>
         </div>
         <div className="flex gap-[3px] mb-4">
-          <div className="h-[4px] w-16" style={{ background: "var(--mc-grass-top)" }} />
-          <div className="h-[4px] w-8"  style={{ background: "var(--mc-stone)" }} />
-          <div className="h-[4px] w-4"  style={{ background: "var(--mc-cobble)" }} />
+          <div
+            className="h-[4px] w-16"
+            style={{ background: "var(--mc-grass-top)" }}
+          />
+          <div
+            className="h-[4px] w-8"
+            style={{ background: "var(--mc-stone)" }}
+          />
+          <div
+            className="h-[4px] w-4"
+            style={{ background: "var(--mc-cobble)" }}
+          />
         </div>
         <p
           className="text-(--ds-ink-muted) text-base max-w-xl"
           style={{ fontFamily: "var(--font-body, sans-serif)" }}
         >
-          A collection of projects I&apos;ve built — from web apps to security tools.
+          A collection of projects I&apos;ve built — from web apps to security
+          tools.
         </p>
       </div>
 
@@ -141,9 +150,11 @@ export default function Projects({ id, className }: ProjectProps) {
 
       {/* CTA */}
       <div className="mt-10 flex justify-start">
-        <Button variant="outline" rightIcon={<ArrowRight size={14} />}>
-          View All Projects
-        </Button>
+        <Link href="https://github.com/called-af">
+          <Button variant="outline" rightIcon={<ArrowRight size={14} />}>
+            View All Projects
+          </Button>
+        </Link>
       </div>
     </section>
   );

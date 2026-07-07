@@ -1,8 +1,6 @@
 import { StaticImageData } from "next/image";
-import portfolioImg from "../assets/portfolio.png";
-import dinamisImg from "../assets/dinamis.png";
-import portScannerImg from "../assets/port_scanner.png";
-import threatImg from "../assets/threat_detection.png";
+import TropisFishImg from "../assets/TropisFishImg.png";
+import DoofusImg from "../assets/DoofusImg.png";
 
 export type ProjectType = {
   id: string;
@@ -15,47 +13,23 @@ export type ProjectType = {
 
 export const projects: ProjectType[] = [
   {
-    id: "portfolio",
-    img: portfolioImg,
-    title: "Portfolio Website",
-    desc: "Personal portfolio built with Next.js 15 and Tailwind CSS v4. Designed with a Minecraft-inspired pixel aesthetic — custom CSS variables, mc-button styles, and a dark/light theme system. Fully responsive with a fixed sidebar nav, smooth scroll detection, and zero external UI libraries.",
+    id: "tropisfish",
+    img: TropisFishImg,
+    title: "Tropis Fish Indonesia",
+    desc: "A company profile and product catalog website for an ornamental fish exporter, built with Laravel 12, Livewire, and Tailwind CSS. Features dynamic category and fish management, searchable collections, responsive design, and an admin dashboard for managing website content.",
     category: "Web",
     links: [
-      { label: "Demo",   url: "#" },
-      { label: "GitHub", url: "#" },
+      { label: "View Website", url: "https://tropisfish.com/" },
     ],
   },
   {
-    id: "dinamis",
-    img: dinamisImg,
-    title: "Dinamis App",
-    desc: "A fullstack internal web application built for a client using Laravel as the backend API and Vue.js on the frontend with Inertia.js for seamless SPA navigation. Features role-based access control, dynamic form management, PDF report generation, and a MySQL database with complex relational queries.",
-    category: "Web",
+    id: "doofus",
+    img: DoofusImg,
+    title: "Doofus",
+    desc: "A Minecraft-inspired voxel engine written in modern C++ using OpenGL. Features chunk-based world generation, greedy meshing, procedural terrain with biome generation, texture arrays, GLSL shaders, first-person camera controls, frustum culling, and a modular rendering architecture built from scratch without a game engine.",
+    category: "Game",
     links: [
-      { label: "Demo",   url: "#" },
-      { label: "GitHub", url: "#" },
-    ],
-  },
-  {
-    id: "port-scanner",
-    img: portScannerImg,
-    title: "Port Scanner",
-    desc: "A lightweight network port scanning tool written for security auditing and reconnaissance purposes. Supports TCP/UDP scanning, customisable port ranges, banner grabbing, and concurrent threading for fast results. Built as a CLI tool with clean output formatting and exportable scan reports.",
-    category: "Security",
-    links: [
-      { label: "GitHub", url: "#" },
-    ],
-  },
-  {
-    id: "threat-detection",
-    img: threatImg,
-    title: "Threat Detection",
-    desc: "A security monitoring system that analyses network traffic and system logs to detect anomalies and potential intrusions in real time. Uses rule-based pattern matching and heuristic analysis to flag suspicious activity. Includes a dashboard for visualising threat events, alert history, and system health metrics.",
-    category: "Security",
-    links: [
-      { label: "Demo",   url: "#" },
-      { label: "GitHub", url: "#" },
-      { label: "Docs",   url: "#" },
+      { label: "GitHub", url: "https://github.com/called-af/doofus.git" },
     ],
   },
 ];
